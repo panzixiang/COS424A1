@@ -1,14 +1,14 @@
 %Change this to the directory containing your data folder
 
-dirn = '/Users/Gazelle/Documents/voxResources';
+dirn = 'C:\Users\Panz\SkyDrive\Princeton Stuff\2015\Spring\COS 424\Assignments\A1\COS424A1';
 
 %intitialize the FV toolbox - you will need to change the filepath appropriately
 
-run('/Users/Gazelle/Documents/MATLAB/vlfeat-0.9.20/toolbox/vl_setup')
+run('C:\Users\Panz\SkyDrive\Princeton Stuff\2015\Spring\COS 424\Assignments\A1\vlfeat-0.9.20\toolbox\vl_setup')
 
 %add tools path - you will need to change the filepath appropriately
 
-addpath(genpath('/Users/Gazelle/Documents/voxResources/tools'))
+addpath(genpath('C:\Users\Panz\SkyDrive\Princeton Stuff\2015\Spring\COS 424\Assignments\A1\COS424A1\tools'))
 
 %load all songs into a single struct
 
