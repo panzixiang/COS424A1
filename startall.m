@@ -37,4 +37,6 @@ GENDATA.classnames = {'Blues', 'Classical', 'Country', 'Disco', 'Hiphop',...
 
 %run fisher vector
 
-FV = demo_fv(GENDATA, 3, 3)
+FV = demo_fv(GENDATA, 3, 3);
+save('FV.mat','FV');
+save('LB.mat','LB');

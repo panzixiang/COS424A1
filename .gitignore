@@ -1,3 +1,6 @@
+#ignore matlab data files
+.mat
+
 #data folder
 data
 
