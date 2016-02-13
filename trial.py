@@ -5,10 +5,13 @@ import pickle
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.cross_validation import KFold
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn import svm
+from sklearn import metrics
 from sklearn.metrics import zero_one_loss
-import random
+from sklearn import cross_validation
+from random import shuffle
 import itertools
 import operator
 
@@ -74,18 +77,31 @@ def main(arg):
 
    
 def runTrial(cla, claName, featList, labels): 
-    training, test, trainingLB, testLB = getFeatures(featList, labels)
+    feats = combineFeatures(featList)
+    feats_shuf = []
+    labels_shuf = []
+    index_shuf = range(len(labels))
+    shuffle(index_shuf)
+    for i in index_shuf:
+        feats_shuf.append(feats[i])
+        labels_shuf.append(labels[i])
 
-     # fit with classifier and predict
-    X = np.array(training)
-    Y = np.array(trainingLB)
+    #training, test, trainingLB, testLB = getFeatures(featList, labels)
+    X = np.array(feats_shuf)
+    Y = np.array(labels_shuf)
+    errorRF = 0.0
+    kf = KFold(1000, n_folds=10)
+    #for train, test in kf:
+     #   X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
+      #  cla.fit(X_train, y_train)
+       # predictions = cla.predict(X_test)
+        #print zero_one_loss(predictions, y_test)
+        #errorRF += zero_one_loss(predictions, y_test)
+    scores = cross_validation.cross_val_score(cla, X, Y, scoring='accuracy', cv=10)
 
-    cla.fit(X,Y)
-    predictions = cla.predict(np.array(test))
-    errorRF = zero_one_loss(predictions, testLB)
     print claName + ", feats: " + printFeatures(featList) + ": " 
-    print "error= " + str(errorRF)
-    return printFeatures(featList), errorRF
+    print "error= " + str(1 - np.mean(scores))
+    return printFeatures(featList), 1-np.mean(scores)
 
 
 def printFeatures(featList):
@@ -103,6 +119,20 @@ def printFeatures(featList):
             featStr += 'hcdf'
         featStr += ' '
     return featStr
+
+def combineFeatures(features):
+    l = []
+    # make total featuresDict
+    featureDict = features[0];
+    if len(features) > 1:
+        for index in range(1, len(features)):
+            for i in range(1000):
+                featureDict[i] += features[index][i]
+
+    for i in range(1000):
+        l.append(featureDict[i])
+
+    return l
 
 def getFeatures(features, labels):
     # select training and test sets
