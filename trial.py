@@ -7,6 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.cross_validation import KFold
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.cluster import KMeans
 from sklearn import svm
 from sklearn import metrics
 from sklearn.metrics import zero_one_loss
@@ -35,6 +36,8 @@ def main(arg):
         cla = svm.SVC(kernel='rbf')
     elif arg[0] == 'svmSig':
         cla = svm.SVC(kernel='sigmoid')
+    elif arg[0] == 'kmeans10': 
+        cla = KMeans(n_clusters=10, init='k-means++', n_init=10, max_iter=500, n_jobs=-2)   
     else:
         exit()
 

@@ -9,7 +9,7 @@ def main():
     for x in range(1000):
         dict[x] = []
 
-    with open('chroma_fv.csv') as f:
+    with open('energy_fv.csv') as f:
         reader = csv.reader(f)  
         for row in reader:
             #print len(row)
@@ -18,7 +18,7 @@ def main():
                 dict[i].append(float(x))
                 i += 1
         print len(dict[0])
-        pickle.dump(dict, open('chroma_fv.p', 'wb'))
+        pickle.dump(dict, open('energy_fv.p', 'wb'))
 
            
     

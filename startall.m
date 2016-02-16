@@ -20,7 +20,7 @@ mfcc = cell(1,1000);
 
 for i = 1:length(DAT)
 
-    mfcc{i} = DAT{i}.mfc;
+    mfcc{i} = DAT{i}.brightness;
 
 end
 
@@ -38,7 +38,7 @@ GENDATA.classnames = {'Blues', 'Classical', 'Country', 'Disco', 'Hiphop',...
 %run fisher vector
 
 FV = demo_fv(GENDATA, 3, 3);
-save('mfcc_.mat','FV');
-csvwrite('mfcc_fv.csv',FV);
+save('specflux_.mat','FV');
+csvwrite('specflux_fv.csv',FV);
 save('LB.mat','LB');
 csvwrite('mfcc_lb.csv',LB);

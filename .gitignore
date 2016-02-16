@@ -2,6 +2,7 @@
 *.mat
 *.csv
 *.p
+*.fig
 
 #data folder
 data
