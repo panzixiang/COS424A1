@@ -71,7 +71,7 @@ def main(arg):
         if index == 5:
             break
         formatted = "%s" % (o,)
-        print formatted # + ", error=" + str(outcomesSorted(o))
+        #print formatted # + ", error=" + str(outcomesSorted(o))
         index += 1
 
 
@@ -99,8 +99,8 @@ def runTrial(cla, claName, featList, labels):
         #errorRF += zero_one_loss(predictions, y_test)
     scores = cross_validation.cross_val_score(cla, X, Y, scoring='accuracy', cv=10)
 
-    print claName + ", feats: " + printFeatures(featList) + ": " 
-    print "error= " + str(1 - np.mean(scores))
+    print claName + "," + printFeatures(featList)
+    print 1 - np.mean(scores)
     return printFeatures(featList), 1-np.mean(scores)
 
 
@@ -118,7 +118,8 @@ def printFeatures(featList):
         elif f is hcdf:
             featStr += 'hcdf'
         featStr += ' '
-    return featStr
+
+    return featStr[:-1]
 
 def combineFeatures(features):
     l = []
