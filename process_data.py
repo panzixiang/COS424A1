@@ -3,7 +3,7 @@ import sys
 import csv
 import pickle
 import numpy as np
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import zero_one_loss
 import random
 
@@ -40,7 +40,7 @@ def main():
     Y = np.array(trainingLB)
 
 
-    cla = KNeighborsClassifier(n_neighbors=5)
+    cla = GaussianNB()
     cla.fit(X,Y)
     predictions = cla.predict(np.array(test))
     errorRF = zero_one_loss(predictions, testLB)

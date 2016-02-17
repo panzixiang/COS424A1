@@ -7,7 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.cross_validation import KFold
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
-from sklearn.cluster import KMeans
+from sklearn.naive_bayes import GaussianNB
 from sklearn import svm
 from sklearn import metrics
 from sklearn.metrics import zero_one_loss
@@ -36,8 +36,8 @@ def main(arg):
         cla = svm.SVC(kernel='rbf')
     elif arg[0] == 'svmSig':
         cla = svm.SVC(kernel='sigmoid')
-    elif arg[0] == 'kmeans10': 
-        cla = KMeans(n_clusters=10, init='k-means++', n_init=10, max_iter=500, n_jobs=-2)   
+    elif arg[0] == 'gnb': 
+        cla = GaussianNB()
     else:
         exit()
 
@@ -92,14 +92,14 @@ def runTrial(cla, claName, featList, labels):
     #training, test, trainingLB, testLB = getFeatures(featList, labels)
     X = np.array(feats_shuf)
     Y = np.array(labels_shuf)
-    errorRF = 0.0
+    scores = 0.0
     kf = KFold(1000, n_folds=10)
-    #for train, test in kf:
-     #   X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
-      #  cla.fit(X_train, y_train)
-       # predictions = cla.predict(X_test)
-        #print zero_one_loss(predictions, y_test)
-        #errorRF += zero_one_loss(predictions, y_test)
+    # for train, test in kf:
+    #    X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
+    #    cla.fit(X_train, y_train)
+    #    predictions = cla.predict(X_test)
+    #    print zero_one_loss(predictions, y_test)
+    #    scores += zero_one_loss(predictions, y_test)
     scores = cross_validation.cross_val_score(cla, X, Y, scoring='accuracy', cv=10)
 
     print claName + "," + printFeatures(featList)
