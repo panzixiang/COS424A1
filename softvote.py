@@ -23,7 +23,7 @@ from sklearn.ensemble import VotingClassifier
 def main(arg):
     global mfcc, chroma, energy, brightness, hcdf, red;
     
-    claTuples = getClassifiers(arg[1:])
+    claTuples, claName = getClassifiers(arg[1:])
 
     if arg[0] == 'soft':
         # use soft vote
@@ -39,7 +39,7 @@ def main(arg):
     energy = pickle.load(open('energy_fv.p', 'rb'))
     brightness = pickle.load(open('brightness_fv.p', 'rb'))
     hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
-    red = pickle.load(open('red.p', 'rb'))
+   # red = pickle.load(open('red.p', 'rb'))
 
     # get labels
     with open('mfcc_lb.csv') as f:
@@ -55,7 +55,7 @@ def main(arg):
     outcomes = {}
 
     for l in featureCombos:
-        featStr, error = runTrial(eclf, arg[0], l, labels)
+        featStr, error = runTrial(eclf, claName, l, labels)
         outcomes[featStr] = error
 
     outcomesSorted = sorted(outcomes.items(), key=operator.itemgetter(1))
@@ -74,8 +74,9 @@ def main(arg):
 def getClassifiers(l):
     
     c = []
-
+    claName = ''
     for i in l:
+        claName += ' '
         if i == 'knn3':
             cla = KNeighborsClassifier(n_neighbors=3)
         elif i == 'knn5':
@@ -95,7 +96,8 @@ def getClassifiers(l):
         else:
             exit()
         c.append((i, cla))
-    return c
+        claName += i
+    return c, claName
    
 def runTrial(cla, claName, featList, labels): 
     feats = combineFeatures(featList)
@@ -138,8 +140,6 @@ def printFeatures(featList):
             featStr += 'energy'
         elif f is hcdf:
             featStr += 'hcdf'
-        elif f is red:
-            featStr += 'red'
         featStr += ' '
 
     return featStr[:-1]
