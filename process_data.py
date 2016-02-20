@@ -4,6 +4,7 @@ import csv
 import pickle
 import numpy as np
 from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn import svm
 from sklearn.metrics import zero_one_loss
 from sklearn.metrics import confusion_matrix
@@ -16,13 +17,14 @@ from random import shuffle
 def main():
     
     filenameLB = 'mfcc_lb.csv'
-    featureDict = pickle.load(open('mfcc_fv.p', 'rb'))
+    mfcc = pickle.load(open('mfcc_fv.p', 'rb'))
+    hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
     
     with open('mfcc_lb.csv') as f:
         reader = csv.reader(f)
         for row in reader:
             labels = row
-
+     
     # select training and test sets
     '''
     TEidx = np.array(random.sample(range(0,1000), 100))
@@ -47,13 +49,14 @@ def main():
     Y = np.array(trainingLB)
 
     '''
-
+    l=[mfcc,hcdf]
+    all_feats = combineFeatures(l)
     feats_shuf = []
     labels_shuf = []
     index_shuf = range(len(labels))
     shuffle(index_shuf)
     for i in index_shuf:
-        feats_shuf.append(featureDict[i])
+        feats_shuf.append(all_feats[i])
         labels_shuf.append(labels[i])
 
 
@@ -61,35 +64,54 @@ def main():
     Y = np.array(labels_shuf)
 
     kf = KFold(1000, n_folds=10)
-    cla = svm.SVC(kernel='linear')
-
-    cm_all = np.zeros((10,10))
+    cla = KNeighborsClassifier(n_neighbors=5)
+    #cla =
+    
+    scores = 0.0
+    cm_all = np.zeros((10,10), dtype=np.int)
     for train, test in kf:
         X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
         cla.fit(X_train, y_train)
         predictions = cla.predict(X_test)
+        scores += zero_one_loss(predictions, y_test)
+        # print y_test
+        # print predictions
         
 
         # Compute confusion matrix
-        cm = confusion_matrix(y_test, predictions)
+        cm = confusion_matrix(y_test, predictions, labels =['1', '2', '3', '4', '5','6', '7', '8', '9', '10'])
         np.set_printoptions(precision=2)
-        print(cm) 
-        np.add(cm_all, cm)
+        #print(cm_all)
+        cm_all = np.add(cm_all, cm)
     
-
+    print scores/10
     plt.figure()
     plot_confusion_matrix(cm_all)
 
     plt.show()
     
+def combineFeatures(features):
+    l = []
+    # make total featuresDict
+    featureDict = features[0];
+    if len(features) > 1:
+        for index in range(1, len(features)):
+            for i in range(1000):
+                featureDict[i] += features[index][i]
 
-def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.Blues):
+    for i in range(1000):
+        l.append(featureDict[i])
+
+    return l
+
+
+def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.YlGnBu):
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
     plt.colorbar()
     tick_marks = np.arange(10)
-    plt.xticks(tick_marks, [1,2,3,4,5,6,7,8,9,10], rotation=45)
-    plt.yticks(tick_marks, [1,2,3,4,5,6,7,8,9,10])
+    plt.xticks(tick_marks, ['Blues', 'Classical', 'Country', 'Disco', 'Hiphop','Jazz', 'Metal', 'Pop', 'Reggae', 'Rock'], rotation=45)
+    plt.yticks(tick_marks, ['Blues', 'Classical', 'Country', 'Disco', 'Hiphop','Jazz', 'Metal', 'Pop', 'Reggae', 'Rock'])
     plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
