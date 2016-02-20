@@ -19,7 +19,7 @@ import operator
 
 
 def main(arg):
-    global mfcc, chroma, energy, brightness, hcdf;
+    global mfcc, chroma, energy, brightness, hcdf, red;
     
     # first arg will be classifier
     if arg[0] == 'knn3':
@@ -47,6 +47,7 @@ def main(arg):
     energy = pickle.load(open('energy_fv.p', 'rb'))
     brightness = pickle.load(open('brightness_fv.p', 'rb'))
     hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
+    red = pickle.load(open('red.p', 'rb'))
 
     # get labels
     with open('mfcc_lb.csv') as f:
@@ -58,7 +59,7 @@ def main(arg):
     # for loop each feature, selecting the two highest
     featureCombos = []
     for i in range(5):
-        featureCombos += list(itertools.combinations([mfcc, chroma, energy, brightness, hcdf], i+1));
+        featureCombos += list(itertools.combinations([chroma, energy, brightness, red], i+1));
     outcomes = {}
 
     for l in featureCombos:
@@ -67,8 +68,8 @@ def main(arg):
 
     outcomesSorted = sorted(outcomes.items(), key=operator.itemgetter(1))
     
-    print "-------------"
-    print "top five:"
+    #print "-------------"
+    #print "top five:"
     index = 0
     for o in outcomesSorted:
         if index == 5:
@@ -120,6 +121,8 @@ def printFeatures(featList):
             featStr += 'energy'
         elif f is hcdf:
             featStr += 'hcdf'
+        elif f is red:
+            featStr += 'red'
         featStr += ' '
 
     return featStr[:-1]
