@@ -1,0 +1,44 @@
+As we approached this classification problem, we decided to begin by visualizing the data in order to gain some understanding of how the song samples differed across genre. Afterwards, we began running classification trials and comparing results. In these trials, we varied each of the following properties: features considered, classifiers used, and methods of combining the results of multiple classifiers.
+
+\subsection{Data Visualization}
+write this:
+- what exactly were we graphing in the bar charts? just the raw data or fischer vectors?
+- what we learned about the data
+
+\subsection{Trial Design}
+In order to compare the results of varying the features considered and classifiers used, we ran each classification trial in the same way. Specifically, we began by shuffling the data so that samples were no longer grouped by genre. We then used 10-fold cross validation to compute the error rate achieved. 
+
+\subsection{Features}
+Initially, we selected five features based on their promising performance in the literature: MFCC, Chroma, Energy, Spectral Flux, and HCDF. We then used the provided scripts to load the song samples in .mat format and extract the five features  from each sample. Because each feature considered is a frame-level feature and therefore high dimensional, we used the provided scripts to apply Fisher Vectors to each feature to generate descriptors before converting the results into .csv format. 
+
+Once we had completed the extraction and quantization process, we experimented with varying the features considered in three ways.
+
+\subsubsection{Experiment 1: Combinations of Features}
+In this experiment, we ran trials for every combination of the five features encoded with Fisher Vectors. For each of eight classifiers considered, we collected the results of predicting based on each possible combination.
+
+\subsubsection{Experiment 2: Reduction of MFCC}
+In this experiment, we looked at the results of projecting the MFCC Fisher Vector down to lower dimension spaces and then running classifications. We ran trials using projections into 3 dimensions and 300 dimensions as features.
+
+\subsubsection{Experiment 3: Using Raw Data}
+The goal of this experiment was to compare the performance of Fisher Vector-generated descriptors with the performance of raw data.  Therefore, we ran trials with classifying on MFCC and HCDF in their FV and raw forms. 
+
+\subsection{Classifiers}
+write this
+\subsubsection{Experiment 1: Vary Classifier}
+write this
+
+\subsection{Classifier Combinations}
+Once we had collected the results achieved by single classifiers, we decided to try pooling the predictions of several classifiers into a single set of predictions. Therefore, we experimented with hard voting and soft voting using our best-performing classifiers.
+
+\subsubsection{Experiment 1: Hard Voting}
+In this experiment, we ran trials in which three classifiers - 5-Nearest Neighbors, Linear SVM, and Gaussian Naive Bayes - engaged in a hard vote to determine the final classification of a sample. This means that each classifier cast one vote per sample considered. Performance across each combination of FV features was considered.
+
+\subsubsection{Experiment 2: Soft Voting} In this experiment, we conducted a soft vote of four classifiers: 5-Nearest Neighbors, Linear SVM, Gaussian Naive Bayes, and Random Forest with a forest of 50 trees. The best performing classifier, Linear SVM, was cast two votes while each of the others cast one. Again, performance across each combination of FV features was considered.
+
+
+
+
+
+
+
+
