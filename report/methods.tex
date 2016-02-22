@@ -4,7 +4,7 @@ As we approached this classification problem, we decided to begin by visualizing
 First we did preliminary analysis of the song data, namely looking at the time-average mean of MFCC coefficients for each genre to verify that there is a measurable difference between genres. We also did a visualization of the dataset by projecting the MFCC feature and HCDF feature using t-distributed stochastic neighborhood embedding (t-sne)  to verify that clustering based algorithms are viable for classifying this dataset.
 
 \subsection{Trial Design}
-In order to compare the results of varying the features considered and classifiers used, we ran each classification trial in the same way. Specifically, we began by shuffling the data so that samples were no longer grouped by genre. We then used 10-fold cross validation to compute the error rate achieved. 
+We did 10-fold CV with zero-one loss to calculate the cross validation error of each feature set and classifier. The dataset is first shuffled and the training dataset is sampled proportional to the label (i.e each training set of 900 will contain all 10 labels in equal proportion).
 
 \subsection{Features}
 Initially, we selected five features based on their promising performance in the literature: MFCC, Chroma, Energy, Spectral Flux, and HCDF. We then used the provided scripts to load the song samples in .mat format and extract the five features from each sample. Because each feature considered is a frame-level feature and therefore high dimensional, we used the provided scripts to apply Fisher Vectors to each feature to generate descriptors before converting the results into .csv format. 

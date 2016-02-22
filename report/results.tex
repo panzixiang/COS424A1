@@ -28,10 +28,10 @@ We also see even in an extremely compressed 3-dimensional projection of the MFC 
 		Min error   & 0.343 & 0.333 & 0.255  & 0.384  & 0.37 & 0.288  & 0.245  & 0.261 \\ \hline
 		Feature set & \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}MFCC\\ HCDF\end{tabular}} & MFCC    & \begin{tabular}[c]{@{}l@{}}MFCC\\ energy\end{tabular} & \begin{tabular}[c]{@{}l@{}}chroma\\ HCDF\end{tabular} & \begin{tabular}[c]{@{}l@{}}MFCC\\ chroma\\ brightness\end{tabular} & \begin{tabular}[c]{@{}l@{}}HCDF\\ brightness\end{tabular} \\ \hline
 	\end{tabular}
-	\caption{10-fold CV classification error rate for different classifiers and the features that performed the best, for full data table see appendix}
+	\caption{10-fold CV classification error rate for different classifiers and the features that performed the best, for full data table see section \ref{section:appendix} Appendix}
 	\label{fig:classifiers}
 \end{figure}
-We see in \ref{fig:classifiers} that the feature set of MFCC, chroma and brightness performed with 0.245 error rate with a soft voting algorithm of KNN5, SVM(Linear kernel) Gaussian NB, and Random Forest.
+We see in figure \ref{fig:classifiers} that the feature set of MFCC, chroma and brightness performed with 0.245 error rate with a soft voting algorithm of KNN5, SVM(Linear kernel) Gaussian NB, and Random Forest.
 \subsection{Fisher vectors vs PCA of raw timeframe data}
 \begin{figure}[h]
 	\floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=4cm}}]{figure}[\FBwidth]
@@ -47,4 +47,4 @@ We see in \ref{fig:classifiers} that the feature set of MFCC, chroma and brightn
 	\end{tabular}
 	}
 \end{figure}
-In \ref{rawdata} we see that the generated Fisher Vectors performs better than just a simple collection of raw data vectors
+In figure \ref{rawdata} we see that the generated Fisher Vectors performs better than just a simple collection of raw data vectors
