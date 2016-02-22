@@ -4,6 +4,12 @@
 *.p
 *.fig
 
+#ignore latex file
+.aux
+cos424_template.pdf
+.bbl
+.blg
+
 #data folder
 data
 
