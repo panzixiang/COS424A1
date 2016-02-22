@@ -5,10 +5,10 @@
 *.fig
 
 #ignore latex file
-*.aux
-cos424_template.pdf
-*.bbl
-*.blg
+report/*.aux
+report/cos424_template.pdf
+report/*.bbl
+report/*.blg
 
 #data folder
 data
