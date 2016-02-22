@@ -9,7 +9,7 @@ def main():
     for x in range(1000):
         dict[x] = []
 
-    with open('red300.csv') as f:
+    with open('mfcc_tsne.csv') as f:
         reader = csv.reader(f)  
         for row in reader:
             #print len(row)
@@ -18,7 +18,7 @@ def main():
                 dict[i].append(float(x))
                 i += 1
         print len(dict[0])
-        pickle.dump(dict, open('red300.p', 'wb'))
+        pickle.dump(dict, open('mfcc_tsne.p', 'wb'))
 
            
     

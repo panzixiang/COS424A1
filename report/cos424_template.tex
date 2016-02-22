@@ -3,7 +3,19 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
-
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{floatrow}
+\usepackage{titlesec}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{wrapfig}
+\setlength{\belowcaptionskip}{0pt}
+\setlength{\abovecaptionskip}{3pt}
+\setlength{\floatsep}{2pt}
+\titlespacing*{\section}{-1pt}{0.8\baselineskip}{0.8\baselineskip}
+\titlespacing*{\subsection}{-1pt}{0.5\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsubsection}{-1pt}{0.2\baselineskip}{0.2\baselineskip}
 
 \title{Formatting Instructions for COS 424 Homeworks and Project}
 
@@ -31,7 +43,7 @@ Affiliation \\
 
 \section{Introduction}
 
-All homework submissions are limited to four pages of text (with additional pages for bibliography). The final project is limited to eight pages of text (with additional pages for bibliography). Note that any homework or project submissions that exceed these page limits will not be read.
+\blindtext
 
 \section{Related Work}
 
@@ -51,7 +63,7 @@ All homework submissions are limited to four pages of text (with additional page
 
 \subsubsection*{Acknowledgments}
 
-\input{acknowledgement.tex}
+\input{acknowledgment.tex}
 
 \bibliography{ref}
 
