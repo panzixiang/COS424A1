@@ -16,17 +16,17 @@ addpath(genpath('C:\Users\Panz\SkyDrive\Princeton Stuff\2015\Spring\COS 424\Assi
 
 %extract the MFCC feature
 
-mfcc = cell(1,1000);
+chroma = cell(1,1000);
 
 for i = 1:length(DAT)
 
-    mfcc{i} = DAT{i}.mfc;
+    chroma{i} = DAT{i}.chroma;
 
 end
 
 %create the structure used as input into the demo_fv
 
-GENDATA.data = mfcc;
+GENDATA.data = chroma;
 
 GENDATA.class = LB;
 
@@ -37,7 +37,7 @@ GENDATA.classnames = {'Blues', 'Classical', 'Country', 'Disco', 'Hiphop',...
 
 %run fisher vector
 
-%FV = demo_fv(GENDATA, 3, 3);
+FV = demo_fv(GENDATA, 3, 3);
 %save('specflux_.mat','FV');
 %csvwrite('specflux_fv.csv',FV);
 %save('LB.mat','LB');
