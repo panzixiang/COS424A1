@@ -7,7 +7,7 @@ First we did preliminary analysis of the song data, namely looking at the time-a
 We did 10-fold CV with zero-one loss to calculate the cross validation error of each feature set and classifier. The dataset is first shuffled and the training dataset is sampled proportional to the label (i.e each training set of 900 will contain all 10 labels in equal proportion).
 
 \subsection{Features}
-Initially, we selected five features that cover different parts of the feature spaces extracted with MIRtoolbox \cite{MIR}: MFCC, Chroma, Energy, Spectral Flux, and HCDF. We then used the provided scripts to load the song samples in .mat format and extract the five features from each sample. Because each feature considered is a frame-level feature and therefore high dimensional, we used the provided scripts to apply Fisher Vectors to each feature to generate descriptors before converting the results into .csv format. 
+Initially, we selected five features (described in Figure \ref{fig:featureSet}) that cover different parts of the feature spaces extracted with MIRtoolbox \cite{MIR}: MFCC, Chroma, Energy, Spectral Flux, and HCDF. We then used the provided scripts to load the song samples in .mat format and extract the five features from each sample. Because each feature considered is a frame-level feature and therefore high dimensional, we used the provided scripts to apply Fisher Vectors to each feature to generate descriptors before converting the results into .csv format. 
 
 Once we had completed the extraction and quantization process, we experimented with varying the features considered in three ways.
 
