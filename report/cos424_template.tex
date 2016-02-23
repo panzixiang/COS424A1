@@ -17,7 +17,7 @@
 \titlespacing*{\subsection}{-1pt}{0.2\baselineskip}{0.2\baselineskip}
 \titlespacing*{\subsubsection}{-1pt}{0.2\baselineskip}{0.2\baselineskip}
 
-\title{Audio classification}
+\title{Audio Classification}
 
 
 \author{
@@ -38,12 +38,12 @@ Affiliation \\
 \maketitle
 
 \begin{abstract}
-
+This report concerns the problem of musical genre classification on the GZTAN dataset. We visualized the data before running a series of trials using different features and classifiers. Ultimately, we observed a maximum accuracy of 75.5\% using a soft-voting ensemble of classifiers. 
 \end{abstract}
 
 \section{Introduction}
 
-\input{Introduction.tex}
+\input{introduction.tex}
 
 \section{Related Work}
 
@@ -67,7 +67,10 @@ Affiliation \\
 
 \bibliographystyle{acm}
 \bibliography{ref}
-
-\section{Appendix}\label{section:appendix}
-
+\section{Appendix} \label{section:appendix}
+\begin{figure}[V]
+\includegraphics[height=120mm, width=70mm]{features}
+\caption{This figure provides a description of various song features and was taken from the given sample paper. \cite{sample}.}
+\label{fig:featureSet}
+\end{figure}
 \end{document}
