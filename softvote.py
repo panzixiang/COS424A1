@@ -16,6 +16,7 @@ from random import shuffle
 import itertools
 import operator
 from sklearn.ensemble import VotingClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 
 # args: hard/soft, list of classifiers
@@ -27,7 +28,7 @@ def main(arg):
 
     if arg[0] == 'soft':
         # use soft vote
-        eclf = VotingClassifier(estimators=claTuples, voting='soft', weights=np.ones(len(claTuples)).tolist())
+        eclf = VotingClassifier(estimators=claTuples, voting='soft', weights=[2,1,1,1])#np.ones(len(claTuples)).tolist())
     else :
         # use hard vote
          eclf = VotingClassifier(estimators=claTuples, voting='hard')
@@ -86,13 +87,15 @@ def getClassifiers(l):
         elif i == 'qda':
             cla = QuadraticDiscriminantAnalysis()
         elif i == 'svmLin':
-            cla = svm.SVC(kernel='linear')
+            cla = svm.SVC(kernel='linear', probability=True)
         elif i == 'svmRbf':
             cla = svm.SVC(kernel='rbf')
         elif i == 'svmSig':
             cla = svm.SVC(kernel='sigmoid')
         elif i == 'gnb': 
             cla = GaussianNB()
+        elif i == 'rforest':
+            cla = RandomForestClassifier(n_estimators=50)
         else:
             exit()
         c.append((i, cla))

@@ -15,6 +15,7 @@ from sklearn import cross_validation
 from random import shuffle
 import itertools
 import operator
+from sklearn.ensemble import RandomForestClassifier
 
 
 
@@ -38,6 +39,8 @@ def main(arg):
         cla = svm.SVC(kernel='sigmoid')
     elif arg[0] == 'gnb': 
         cla = GaussianNB()
+    elif arg[0] == 'rforest':
+        cla = RandomForestClassifier(n_estimators=50)
     else:
         exit()
 
@@ -47,7 +50,7 @@ def main(arg):
     energy = pickle.load(open('energy_fv.p', 'rb'))
     brightness = pickle.load(open('brightness_fv.p', 'rb'))
     hcdf = pickle.load(open('hcdf_fv.p', 'rb'))
-    red = pickle.load(open('red.p', 'rb'))
+    #red = pickle.load(open('red.p', 'rb'))
 
     # get labels
     with open('mfcc_lb.csv') as f:
@@ -59,7 +62,7 @@ def main(arg):
     # for loop each feature, selecting the two highest
     featureCombos = []
     for i in range(5):
-        featureCombos += list(itertools.combinations([chroma, energy, brightness, red], i+1));
+        featureCombos += list(itertools.combinations([chroma, energy, brightness, mfcc, hcdf], i+1));
     outcomes = {}
 
     for l in featureCombos:
@@ -122,7 +125,7 @@ def printFeatures(featList):
         elif f is hcdf:
             featStr += 'hcdf'
         elif f is red:
-            featStr += 'red'
+            featStr += 'red3'
         featStr += ' '
 
     return featStr[:-1]
