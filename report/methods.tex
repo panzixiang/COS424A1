@@ -15,10 +15,12 @@ Once we had completed the extraction and quantization process, we experimented w
 In this experiment, we ran trials for every combination of the five features encoded with Fisher Vectors. For each of eight classifiers considered, we collected the results of predicting based on each possible combination. We used the following classifiers:
 
 \begin{tabular}{lll}
-	Clustering classifiers:     &  & K-Nearest Neighbors (KNN3, KNN5)                                                                                                                  \\
-	Generative classifiers:     &  & Gaussian Naive Bayes (GNB)                                                                                                                        \\
-	Discriminative classifiers: &  & \begin{tabular}[c]{@{}l@{}}Linear-, Quadratic Discriminant Analysis (LDA, QDA), \\ SVM (linear, and rbf kernels), Random forest (RF)\end{tabular}
+	Clustering classifiers:     &  & K-Nearest Neighbors \cite{knn} (KNN3, KNN5)                                                                                                                  \\
+	Generative classifiers:     &  & Gaussian Naive Bayes \cite{gnb} (GNB)                                                                                                                        \\
+	Discriminative classifiers: &  & \begin{tabular}[c]{@{}l@{}}Linear-, Quadratic Discriminant Analysis\cite{lda}\cite{qda} (LDA, QDA), \\ SVM (linear, and rbf kernels)\cite{svm}, Random forest\cite{rf} (RF)\end{tabular}
 \end{tabular}
+
+We used the scikit-learn implementations of these classifiers \cite{scikit-learn}. Our code was based on the examples provided in the scikit-learn documentation pages cited above.
 
 \subsubsection{Experiment 2: Using MFCC and Chroma Raw Data}
 The goal of this experiment was to compare the performance of Fisher Vector-generated descriptors with the performance of MFCC and Chroma raw data. We extracted the first 1000 frames of each song and concatenated the features to form a $32000\times 1000$ matrix for MFCC and $12000\times 1000$ matrix for chroma, then we used PCA and t-sne to project the data down to a 900-dimensional feature to maintain a feature-sample ratio of less than 1. We then compared the performance of these matrices with the corresponding Fisher Vector matrices.
